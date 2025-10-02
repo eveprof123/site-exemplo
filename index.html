@@ -1,1 +1,577 @@
-Site exemplo 
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CineStream - Séries e Filmes</title>
+    <style>
+        body {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);
+            color: white;
+            min-height: 100vh;
+        }
+
+        .header {
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 1rem 2rem;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-menu a {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-menu a:hover, .nav-menu a.active {
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            transform: translateY(-2px);
+        }
+
+        .search-bar {
+            display: flex;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 25px;
+            padding: 0.5rem 1rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .search-bar input {
+            background: none;
+            border: none;
+            color: white;
+            padding: 0.5rem;
+            outline: none;
+            width: 200px;
+        }
+
+        .search-bar input::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .main-content {
+            margin-top: 80px;
+            padding: 2rem;
+        }
+
+        .hero-section {
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.7)), url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><rect fill="%23ff6b6b" width="1200" height="600"/><circle fill="%234ecdc4" cx="300" cy="150" r="100" opacity="0.3"/><circle fill="%23ffe66d" cx="900" cy="400" r="150" opacity="0.2"/></svg>');
+            background-size: cover;
+            background-position: center;
+            height: 500px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            border-radius: 20px;
+            margin-bottom: 3rem;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .cta-button {
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(255, 107, 107, 0.3);
+        }
+
+        .section-title {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .content-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .content-card:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+        }
+
+        .card-image {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #ffe66d);
+            border-radius: 10px;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+        }
+
+        .card-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .card-genre {
+            color: #4ecdc4;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .card-rating {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .stars {
+            color: #ffe66d;
+        }
+
+        .card-description {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            line-height: 1.4;
+        }
+
+        .categories {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .category-btn {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: none;
+            padding: 0.7rem 1.5rem;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .category-btn:hover, .category-btn.active {
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            transform: translateY(-2px);
+        }
+
+        .footer {
+            background: rgba(0, 0, 0, 0.8);
+            padding: 2rem;
+            text-align: center;
+            margin-top: 3rem;
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                flex-direction: column;
+                gap: 1rem;
+                padding: 1rem;
+            }
+
+            .nav-menu {
+                gap: 1rem;
+            }
+
+            .search-bar input {
+                width: 150px;
+            }
+
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .content-grid {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                gap: 1rem;
+            }
+
+            .main-content {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="logo">🎬 CineStream</div>
+        <nav>
+            <ul class="nav-menu">
+                <li><a href="#" class="active" onclick="showSection('home')">Início</a></li>
+                <li><a href="#" onclick="showSection('movies')">Filmes</a></li>
+                <li><a href="#" onclick="showSection('series')">Séries</a></li>
+                <li><a href="#" onclick="showSection('favorites')">Favoritos</a></li>
+            </ul>
+        </nav>
+        <div class="search-bar">
+            <input type="text" placeholder="Buscar filmes e séries..." id="searchInput" onkeyup="searchContent(event)">
+            <span>🔍</span>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <section class="hero-section">
+            <div class="hero-content">
+                <h1>Bem-vindo ao CineStream</h1>
+                <p>Descubra os melhores filmes e séries em um só lugar</p>
+                <button class="cta-button" onclick="showSection('movies')">Explorar Agora</button>
+            </div>
+        </section>
+
+        <div class="categories">
+            <button class="category-btn active" onclick="filterContent('all')">Todos</button>
+            <button class="category-btn" onclick="filterContent('acao')">Ação</button>
+            <button class="category-btn" onclick="filterContent('drama')">Drama</button>
+            <button class="category-btn" onclick="filterContent('comedia')">Comédia</button>
+            <button class="category-btn" onclick="filterContent('ficcao')">Ficção Científica</button>
+            <button class="category-btn" onclick="filterContent('terror')">Terror</button>
+        </div>
+
+        <section id="content-section">
+            <h2 class="section-title">Em Destaque</h2>
+            <div class="content-grid" id="contentGrid">
+                <!-- Conteúdo será carregado dinamicamente -->
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2024 CineStream. Todos os direitos reservados. | Desenvolvido com ❤️ para amantes do cinema</p>
+    </footer>
+
+    <script>
+        const contentData = {
+            movies: [
+                {
+                    title: "Vingadores: Ultimato",
+                    genre: "acao",
+                    rating: 5,
+                    description: "A batalha final contra Thanos para salvar o universo.",
+                    emoji: "🦸‍♂️",
+                    type: "filme"
+                },
+                {
+                    title: "Parasita",
+                    genre: "drama",
+                    rating: 5,
+                    description: "Um thriller psicológico sobre desigualdade social.",
+                    emoji: "🎭",
+                    type: "filme"
+                },
+                {
+                    title: "Interestelar",
+                    genre: "ficcao",
+                    rating: 5,
+                    description: "Uma jornada épica através do espaço e tempo.",
+                    emoji: "🚀",
+                    type: "filme"
+                },
+                {
+                    title: "Coringa",
+                    genre: "drama",
+                    rating: 4,
+                    description: "A origem sombria do icônico vilão de Gotham.",
+                    emoji: "🃏",
+                    type: "filme"
+                },
+                {
+                    title: "Toy Story 4",
+                    genre: "comedia",
+                    rating: 4,
+                    description: "Woody e Buzz em uma nova aventura emocionante.",
+                    emoji: "🧸",
+                    type: "filme"
+                },
+                {
+                    title: "Hereditário",
+                    genre: "terror",
+                    rating: 4,
+                    description: "Um horror psicológico sobre segredos familiares.",
+                    emoji: "👻",
+                    type: "filme"
+                }
+            ],
+            series: [
+                {
+                    title: "Stranger Things",
+                    genre: "ficcao",
+                    rating: 5,
+                    description: "Mistérios sobrenaturais em uma pequena cidade dos anos 80.",
+                    emoji: "🔮",
+                    type: "serie"
+                },
+                {
+                    title: "Breaking Bad",
+                    genre: "drama",
+                    rating: 5,
+                    description: "A transformação de um professor em um criminoso.",
+                    emoji: "⚗️",
+                    type: "serie"
+                },
+                {
+                    title: "The Office",
+                    genre: "comedia",
+                    rating: 4,
+                    description: "Comédia sobre o dia a dia em um escritório.",
+                    emoji: "📋",
+                    type: "serie"
+                },
+                {
+                    title: "Game of Thrones",
+                    genre: "acao",
+                    rating: 4,
+                    description: "Épica batalha pelo Trono de Ferro em Westeros.",
+                    emoji: "⚔️",
+                    type: "serie"
+                },
+                {
+                    title: "Black Mirror",
+                    genre: "ficcao",
+                    rating: 4,
+                    description: "Antologia sobre os perigos da tecnologia moderna.",
+                    emoji: "📱",
+                    type: "serie"
+                },
+                {
+                    title: "The Haunting of Hill House",
+                    genre: "terror",
+                    rating: 4,
+                    description: "Uma família assombrada por memórias de uma casa mal-assombrada.",
+                    emoji: "🏚️",
+                    type: "serie"
+                }
+            ]
+        };
+
+        let currentContent = [...contentData.movies, ...contentData.series];
+        let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+
+        function renderContent(content) {
+            const grid = document.getElementById('contentGrid');
+            grid.innerHTML = '';
+
+            content.forEach((item, index) => {
+                const stars = '⭐'.repeat(item.rating) + '☆'.repeat(5 - item.rating);
+                const isFavorite = favorites.includes(item.title);
+                
+                const card = document.createElement('div');
+                card.className = 'content-card';
+                card.innerHTML = `
+                    <div class="card-image">
+                        ${item.emoji}
+                    </div>
+                    <div class="card-title">${item.title}</div>
+                    <div class="card-genre">${item.type.toUpperCase()} • ${getGenreName(item.genre)}</div>
+                    <div class="card-rating">
+                        <span class="stars">${stars}</span>
+                        <span>${item.rating}/5</span>
+                    </div>
+                    <div class="card-description">${item.description}</div>
+                    <div style="margin-top: 1rem; display: flex; gap: 0.5rem;">
+                        <button class="cta-button" style="padding: 0.5rem 1rem; font-size: 0.9rem;" onclick="watchContent('${item.title}')">
+                            ▶️ Assistir
+                        </button>
+                        <button class="category-btn" style="padding: 0.5rem;" onclick="toggleFavorite('${item.title}')" title="${isFavorite ? 'Remover dos favoritos' : 'Adicionar aos favoritos'}">
+                            ${isFavorite ? '❤️' : '🤍'}
+                        </button>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        function getGenreName(genre) {
+            const genres = {
+                'acao': 'Ação',
+                'drama': 'Drama',
+                'comedia': 'Comédia',
+                'ficcao': 'Ficção Científica',
+                'terror': 'Terror'
+            };
+            return genres[genre] || genre;
+        }
+
+        function showSection(section) {
+            // Atualizar menu ativo
+            document.querySelectorAll('.nav-menu a').forEach(a => a.classList.remove('active'));
+            event.target.classList.add('active');
+
+            const titleElement = document.querySelector('.section-title');
+            
+            switch(section) {
+                case 'home':
+                    currentContent = [...contentData.movies, ...contentData.series];
+                    titleElement.textContent = 'Em Destaque';
+                    break;
+                case 'movies':
+                    currentContent = contentData.movies;
+                    titleElement.textContent = 'Filmes';
+                    break;
+                case 'series':
+                    currentContent = contentData.series;
+                    titleElement.textContent = 'Séries';
+                    break;
+                case 'favorites':
+                    currentContent = [...contentData.movies, ...contentData.series].filter(item => 
+                        favorites.includes(item.title)
+                    );
+                    titleElement.textContent = 'Meus Favoritos';
+                    break;
+            }
+            
+            renderContent(currentContent);
+            resetCategoryButtons();
+        }
+
+        function filterContent(genre) {
+            // Atualizar botão ativo
+            document.querySelectorAll('.category-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+
+            if (genre === 'all') {
+                renderContent(currentContent);
+            } else {
+                const filtered = currentContent.filter(item => item.genre === genre);
+                renderContent(filtered);
+            }
+        }
+
+        function resetCategoryButtons() {
+            document.querySelectorAll('.category-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelector('.category-btn').classList.add('active');
+        }
+
+        function searchContent(event) {
+            const searchTerm = event.target.value.toLowerCase();
+            
+            if (event.key === 'Enter' || searchTerm === '') {
+                if (searchTerm === '') {
+                    renderContent(currentContent);
+                } else {
+                    const filtered = currentContent.filter(item => 
+                        item.title.toLowerCase().includes(searchTerm) ||
+                        item.description.toLowerCase().includes(searchTerm) ||
+                        getGenreName(item.genre).toLowerCase().includes(searchTerm)
+                    );
+                    renderContent(filtered);
+                }
+                resetCategoryButtons();
+            }
+        }
+
+        function watchContent(title) {
+            alert(`🎬 Iniciando reprodução de "${title}"!\n\nEm um site real, isso abriria o player de vídeo.`);
+        }
+
+        function toggleFavorite(title) {
+            const index = favorites.indexOf(title);
+            if (index > -1) {
+                favorites.splice(index, 1);
+            } else {
+                favorites.push(title);
+            }
+            
+            localStorage.setItem('favorites', JSON.stringify(favorites));
+            
+            // Re-renderizar para atualizar os ícones de coração
+            const currentSection = document.querySelector('.nav-menu a.active').textContent.toLowerCase();
+            if (currentSection === 'favoritos') {
+                showSection('favorites');
+            } else {
+                renderContent(currentContent);
+            }
+        }
+
+        // Inicializar a página
+        document.addEventListener('DOMContentLoaded', function() {
+            renderContent(currentContent);
+        });
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9883ddf1515ec20f',t:'MTc1OTQwNDYxOC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
