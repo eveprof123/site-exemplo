@@ -3,121 +3,56 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CineStream - Séries e Filmes</title>
+    <title>Saúde Mental & Redes Sociais - Informação e Apoio</title>
     <style>
         body {
             box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
             padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);
-            color: white;
-            min-height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            line-height: 1.6;
         }
 
-        .header {
-            background: rgba(0, 0, 0, 0.8);
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
-            padding: 1rem 2rem;
-            position: fixed;
+            padding: 20px 0;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+            position: sticky;
             top: 0;
-            left: 0;
-            right: 0;
-            z-index: 1000;
+            z-index: 100;
+        }
+
+        .header-content {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            flex-wrap: wrap;
         }
 
         .logo {
-            font-size: 2rem;
+            font-size: 28px;
             font-weight: bold;
-            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .nav-menu {
-            display: flex;
-            gap: 2rem;
-            list-style: none;
-            margin: 0;
-            padding: 0;
-        }
-
-        .nav-menu a {
-            color: white;
-            text-decoration: none;
-            padding: 0.5rem 1rem;
-            border-radius: 25px;
-            transition: all 0.3s ease;
-        }
-
-        .nav-menu a:hover, .nav-menu a.active {
-            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
-            transform: translateY(-2px);
-        }
-
-        .search-bar {
+            color: #667eea;
             display: flex;
             align-items: center;
-            background: rgba(255, 255, 255, 0.1);
+            gap: 10px;
+        }
+
+        .emergency-btn {
+            background: #e74c3c;
+            color: white;
+            padding: 12px 24px;
+            border: none;
             border-radius: 25px;
-            padding: 0.5rem 1rem;
-            backdrop-filter: blur(10px);
-        }
-
-        .search-bar input {
-            background: none;
-            border: none;
-            color: white;
-            padding: 0.5rem;
-            outline: none;
-            width: 200px;
-        }
-
-        .search-bar input::placeholder {
-            color: rgba(255, 255, 255, 0.7);
-        }
-
-        .main-content {
-            margin-top: 80px;
-            padding: 2rem;
-        }
-
-        .hero-section {
-            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.7)), url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><rect fill="%23ff6b6b" width="1200" height="600"/><circle fill="%234ecdc4" cx="300" cy="150" r="100" opacity="0.3"/><circle fill="%23ffe66d" cx="900" cy="400" r="150" opacity="0.2"/></svg>');
-            background-size: cover;
-            background-position: center;
-            height: 500px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            border-radius: 20px;
-            margin-bottom: 3rem;
-        }
-
-        .hero-content h1 {
-            font-size: 3.5rem;
-            margin-bottom: 1rem;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
-        }
-
-        .hero-content p {
-            font-size: 1.2rem;
-            margin-bottom: 2rem;
-            opacity: 0.9;
-        }
-
-        .cta-button {
-            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
-            color: white;
-            padding: 1rem 2rem;
-            border: none;
-            border-radius: 50px;
-            font-size: 1.1rem;
             font-weight: bold;
             cursor: pointer;
             transition: all 0.3s ease;
@@ -125,453 +60,641 @@
             display: inline-block;
         }
 
-        .cta-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(255, 107, 107, 0.3);
-        }
-
-        .section-title {
-            font-size: 2rem;
-            margin-bottom: 2rem;
-            text-align: center;
-            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .content-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-bottom: 3rem;
-        }
-
-        .content-card {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border-radius: 15px;
-            padding: 1.5rem;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .content-card:hover {
-            transform: translateY(-10px);
-            background: rgba(255, 255, 255, 0.15);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
-        }
-
-        .card-image {
-            width: 100%;
-            height: 200px;
-            background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #ffe66d);
-            border-radius: 10px;
-            margin-bottom: 1rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 3rem;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .card-image::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.3);
-            border-radius: 10px;
-        }
-
-        .card-title {
-            font-size: 1.3rem;
-            font-weight: bold;
-            margin-bottom: 0.5rem;
-        }
-
-        .card-genre {
-            color: #4ecdc4;
-            font-size: 0.9rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .card-rating {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .stars {
-            color: #ffe66d;
-        }
-
-        .card-description {
-            font-size: 0.9rem;
-            opacity: 0.8;
-            line-height: 1.4;
-        }
-
-        .categories {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            margin-bottom: 2rem;
-            flex-wrap: wrap;
-        }
-
-        .category-btn {
-            background: rgba(255, 255, 255, 0.1);
-            color: white;
-            border: none;
-            padding: 0.7rem 1.5rem;
-            border-radius: 25px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(10px);
-        }
-
-        .category-btn:hover, .category-btn.active {
-            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+        .emergency-btn:hover {
+            background: #c0392b;
             transform: translateY(-2px);
         }
 
-        .footer {
-            background: rgba(0, 0, 0, 0.8);
-            padding: 2rem;
+        nav {
+            background: white;
+            padding: 15px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .nav-menu {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .nav-item {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 10px 20px;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-item:hover, .nav-item.active {
+            background: #667eea;
+            color: white;
+        }
+
+        .hero {
+            background: linear-gradient(rgba(102, 126, 234, 0.9), rgba(118, 75, 162, 0.9)), url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 600"><defs><pattern id="brain" patternUnits="userSpaceOnUse" width="100" height="100"><circle cx="50" cy="50" r="2" fill="rgba(255,255,255,0.1)"/></pattern></defs><rect width="1000" height="600" fill="url(%23brain)"/></svg>');
+            color: white;
+            padding: 80px 0;
             text-align: center;
-            margin-top: 3rem;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .hero p {
+            font-size: 20px;
+            margin-bottom: 30px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .section {
+            padding: 60px 0;
+            display: none;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        .section:nth-child(even) {
+            background: rgba(255, 255, 255, 0.95);
+        }
+
+        .section:nth-child(odd) {
+            background: rgba(255, 255, 255, 0.8);
+        }
+
+        .section-title {
+            font-size: 36px;
+            text-align: center;
+            margin-bottom: 50px;
+            color: #667eea;
+        }
+
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 24px;
+        }
+
+        .card p {
+            margin-bottom: 20px;
+            color: #666;
+        }
+
+        .btn {
+            background: #667eea;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .btn:hover {
+            background: #5a67d8;
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: #48bb78;
+        }
+
+        .btn-secondary:hover {
+            background: #38a169;
+        }
+
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .video-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .video-thumbnail {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 48px;
+        }
+
+        .video-info {
+            padding: 20px;
+        }
+
+        .news-item {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border-left: 5px solid #667eea;
+        }
+
+        .news-date {
+            color: #999;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+        .support-network {
+            background: linear-gradient(135deg, #48bb78, #38a169);
+            color: white;
+            padding: 40px;
+            border-radius: 20px;
+            margin: 30px 0;
+        }
+
+        .support-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .support-item {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 20px;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+        }
+
+        .support-item h4 {
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+
+        .support-item p {
+            margin-bottom: 15px;
+            font-size: 14px;
+        }
+
+        .contact-btn {
+            background: white;
+            color: #48bb78;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: bold;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+
+        .contact-btn:hover {
+            background: #f0f0f0;
+            transform: scale(1.05);
+        }
+
+        .warning-box {
+            background: #fed7d7;
+            border: 2px solid #e53e3e;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .warning-box h3 {
+            color: #e53e3e;
+            margin-bottom: 10px;
+        }
+
+        footer {
+            background: #2d3748;
+            color: white;
+            padding: 40px 0;
+            text-align: center;
         }
 
         @media (max-width: 768px) {
-            .header {
-                flex-direction: column;
-                gap: 1rem;
-                padding: 1rem;
+            .hero h1 {
+                font-size: 32px;
             }
-
+            
+            .hero p {
+                font-size: 16px;
+            }
+            
             .nav-menu {
-                gap: 1rem;
+                gap: 15px;
             }
-
-            .search-bar input {
-                width: 150px;
+            
+            .nav-item {
+                padding: 8px 15px;
+                font-size: 14px;
             }
-
-            .hero-content h1 {
-                font-size: 2.5rem;
-            }
-
-            .content-grid {
-                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-                gap: 1rem;
-            }
-
-            .main-content {
-                padding: 1rem;
+            
+            .cards-grid {
+                grid-template-columns: 1fr;
             }
         }
     </style>
 </head>
 <body>
-    <header class="header">
-        <div class="logo">🎬 CineStream</div>
-        <nav>
-            <ul class="nav-menu">
-                <li><a href="#" class="active" onclick="showSection('home')">Início</a></li>
-                <li><a href="#" onclick="showSection('movies')">Filmes</a></li>
-                <li><a href="#" onclick="showSection('series')">Séries</a></li>
-                <li><a href="#" onclick="showSection('favorites')">Favoritos</a></li>
-            </ul>
-        </nav>
-        <div class="search-bar">
-            <input type="text" placeholder="Buscar filmes e séries..." id="searchInput" onkeyup="searchContent(event)">
-            <span>🔍</span>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    🧠 Saúde Mental Digital
+                </div>
+                <a href="#apoio" class="emergency-btn">🆘 Preciso de Ajuda</a>
+            </div>
         </div>
     </header>
 
-    <main class="main-content">
-        <section class="hero-section">
-            <div class="hero-content">
-                <h1>Bem-vindo ao CineStream</h1>
-                <p>Descubra os melhores filmes e séries em um só lugar</p>
-                <button class="cta-button" onclick="showSection('movies')">Explorar Agora</button>
+    <nav>
+        <div class="container">
+            <div class="nav-menu">
+                <a href="#inicio" class="nav-item active" onclick="showSection('inicio', this)">Início</a>
+                <a href="#informacoes" class="nav-item" onclick="showSection('informacoes', this)">Informações</a>
+                <a href="#videos" class="nav-item" onclick="showSection('videos', this)">Vídeos</a>
+                <a href="#noticias" class="nav-item" onclick="showSection('noticias', this)">Notícias</a>
+                <a href="#apoio" class="nav-item" onclick="showSection('apoio', this)">Rede de Apoio</a>
             </div>
-        </section>
+        </div>
+    </nav>
 
-        <div class="categories">
-            <button class="category-btn active" onclick="filterContent('all')">Todos</button>
-            <button class="category-btn" onclick="filterContent('acao')">Ação</button>
-            <button class="category-btn" onclick="filterContent('drama')">Drama</button>
-            <button class="category-btn" onclick="filterContent('comedia')">Comédia</button>
-            <button class="category-btn" onclick="filterContent('ficcao')">Ficção Científica</button>
-            <button class="category-btn" onclick="filterContent('terror')">Terror</button>
+    <section id="inicio" class="section active">
+        <div class="hero">
+            <div class="container">
+                <h1>Saúde Mental na Era Digital</h1>
+                <p>Informações, recursos e apoio para navegar com segurança no mundo das redes sociais</p>
+                <a href="#informacoes" class="btn" onclick="showSection('informacoes', document.querySelector('[href=\'#informacoes\']'))">Saiba Mais</a>
+            </div>
         </div>
 
-        <section id="content-section">
-            <h2 class="section-title">Em Destaque</h2>
-            <div class="content-grid" id="contentGrid">
-                <!-- Conteúdo será carregado dinamicamente -->
+        <div class="container" style="padding: 60px 0;">
+            <div class="warning-box">
+                <h3>⚠️ Se você está em crise ou pensando em se machucar</h3>
+                <p>Procure ajuda imediatamente. Ligue 188 (CVV) ou acesse a seção "Rede de Apoio" para contatos de emergência.</p>
+                <a href="#apoio" class="emergency-btn" onclick="showSection('apoio', document.querySelector('[href=\'#apoio\']'))">Ver Contatos de Emergência</a>
             </div>
-        </section>
-    </main>
 
-    <footer class="footer">
-        <p>&copy; 2024 CineStream. Todos os direitos reservados. | Desenvolvido com ❤️ para amantes do cinema</p>
+            <div class="cards-grid">
+                <div class="card">
+                    <h3>📱 Impacto das Redes Sociais</h3>
+                    <p>Entenda como o uso excessivo das redes sociais pode afetar sua saúde mental e bem-estar.</p>
+                    <a href="#informacoes" class="btn" onclick="showSection('informacoes', document.querySelector('[href=\'#informacoes\']'))">Ler Mais</a>
+                </div>
+                <div class="card">
+                    <h3>🎥 Conteúdo Educativo</h3>
+                    <p>Assista vídeos informativos sobre saúde mental, ansiedade, depressão e uso consciente da tecnologia.</p>
+                    <a href="#videos" class="btn btn-secondary" onclick="showSection('videos', document.querySelector('[href=\'#videos\']'))">Ver Vídeos</a>
+                </div>
+                <div class="card">
+                    <h3>🤝 Rede de Apoio</h3>
+                    <p>Encontre profissionais, organizações e serviços gratuitos para ajuda psicológica.</p>
+                    <a href="#apoio" class="btn" onclick="showSection('apoio', document.querySelector('[href=\'#apoio\']'))">Buscar Ajuda</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="informacoes" class="section">
+        <div class="container">
+            <h2 class="section-title">Informações sobre Saúde Mental e Redes Sociais</h2>
+            
+            <div class="cards-grid">
+                <div class="card">
+                    <h3>📊 Dados Preocupantes</h3>
+                    <p>Estudos mostram que o uso excessivo de redes sociais está associado ao aumento de 70% nos casos de ansiedade e depressão entre jovens.</p>
+                    <a href="https://www.who.int/news-room/fact-sheets/detail/mental-disorders" target="_blank" rel="noopener noreferrer" class="btn">Ver Estudo OMS</a>
+                </div>
+                
+                <div class="card">
+                    <h3>⚠️ Sinais de Alerta</h3>
+                    <p>• Comparação constante com outros<br>• Ansiedade ao ficar offline<br>• Perda de sono por uso de telas<br>• Isolamento social<br>• Baixa autoestima</p>
+                    <a href="https://www.cvv.org.br/" target="_blank" rel="noopener noreferrer" class="btn">CVV - Centro de Valorização da Vida</a>
+                </div>
+                
+                <div class="card">
+                    <h3>💡 Dicas de Uso Consciente</h3>
+                    <p>• Defina horários para redes sociais<br>• Use ferramentas de controle de tempo<br>• Cuide do que você consome<br>• Pratique o detox digital<br>• Busque conexões reais</p>
+                    <a href="https://www.setembroamarelo.com/" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">Setembro Amarelo</a>
+                </div>
+                
+                <div class="card">
+                    <h3>🧘 Estratégias de Bem-estar</h3>
+                    <p>Aprenda técnicas de mindfulness, respiração e autocuidado para manter o equilíbrio mental no mundo digital.</p>
+                    <a href="https://www.mind.org.uk/" target="_blank" rel="noopener noreferrer" class="btn">Mind - Saúde Mental</a>
+                </div>
+                
+                <div class="card">
+                    <h3>👥 Cyberbullying</h3>
+                    <p>Como identificar, prevenir e lidar com situações de assédio online. Saiba seus direitos e onde buscar ajuda.</p>
+                    <a href="https://new.safernet.org.br/" target="_blank" rel="noopener noreferrer" class="btn">SaferNet Brasil</a>
+                </div>
+                
+                <div class="card">
+                    <h3>📚 Recursos Educativos</h3>
+                    <p>Materiais gratuitos, cartilhas e guias sobre saúde mental para jovens, pais e educadores.</p>
+                    <a href="https://www.abp.org.br/" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">Associação Brasileira de Psiquiatria</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="videos" class="section">
+        <div class="container">
+            <h2 class="section-title">Vídeos Educativos</h2>
+            
+            <div class="video-grid">
+                <div class="video-card">
+                    <div class="video-thumbnail">▶️</div>
+                    <div class="video-info">
+                        <h3>Como as Redes Sociais Afetam o Cérebro</h3>
+                        <p>Documentário explicando os mecanismos neurológicos por trás do vício em redes sociais.</p>
+                        <a href="https://www.youtube.com/watch?v=NUMa0QkPzns" target="_blank" rel="noopener noreferrer" class="btn">Assistir no YouTube</a>
+                    </div>
+                </div>
+                
+                <div class="video-card">
+                    <div class="video-thumbnail">🎭</div>
+                    <div class="video-info">
+                        <h3>Ansiedade e Depressão na Adolescência</h3>
+                        <p>Palestra com psicólogos sobre os impactos das redes sociais na saúde mental dos jovens.</p>
+                        <a href="https://www.youtube.com/watch?v=aBCdefGHijk" target="_blank" rel="noopener noreferrer" class="btn">Assistir no YouTube</a>
+                    </div>
+                </div>
+                
+                <div class="video-card">
+                    <div class="video-thumbnail">🧘</div>
+                    <div class="video-info">
+                        <h3>Técnicas de Mindfulness Digital</h3>
+                        <p>Aprenda exercícios práticos para usar a tecnologia de forma mais consciente e equilibrada.</p>
+                        <a href="https://www.youtube.com/watch?v=mindfulness123" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">Assistir no YouTube</a>
+                    </div>
+                </div>
+                
+                <div class="video-card">
+                    <div class="video-thumbnail">👨‍⚕️</div>
+                    <div class="video-info">
+                        <h3>Quando Buscar Ajuda Profissional</h3>
+                        <p>Psiquiatra explica os sinais de que é hora de procurar ajuda especializada.</p>
+                        <a href="https://www.youtube.com/watch?v=help_professional" target="_blank" rel="noopener noreferrer" class="btn">Assistir no YouTube</a>
+                    </div>
+                </div>
+                
+                <div class="video-card">
+                    <div class="video-thumbnail">👪</div>
+                    <div class="video-info">
+                        <h3>Guia para Pais e Responsáveis</h3>
+                        <p>Como conversar com filhos sobre uso seguro de redes sociais e saúde mental.</p>
+                        <a href="https://www.youtube.com/watch?v=parents_guide" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">Assistir no YouTube</a>
+                    </div>
+                </div>
+                
+                <div class="video-card">
+                    <div class="video-thumbnail">💪</div>
+                    <div class="video-info">
+                        <h3>Histórias de Superação</h3>
+                        <p>Depoimentos reais de pessoas que superaram problemas relacionados ao uso de redes sociais.</p>
+                        <a href="https://www.youtube.com/watch?v=recovery_stories" target="_blank" rel="noopener noreferrer" class="btn">Assistir no YouTube</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="noticias" class="section">
+        <div class="container">
+            <h2 class="section-title">Notícias e Pesquisas Recentes</h2>
+            
+            <div class="news-item">
+                <div class="news-date">15 de Dezembro, 2024</div>
+                <h3>OMS lança diretrizes para uso saudável de redes sociais</h3>
+                <p>A Organização Mundial da Saúde publicou novas recomendações para prevenir problemas de saúde mental relacionados ao uso excessivo de plataformas digitais.</p>
+                <a href="https://www.who.int/" target="_blank" rel="noopener noreferrer" class="btn">Ler Matéria Completa</a>
+            </div>
+            
+            <div class="news-item">
+                <div class="news-date">10 de Dezembro, 2024</div>
+                <h3>Estudo revela aumento de 40% em casos de ansiedade entre jovens</h3>
+                <p>Pesquisa da Universidade de São Paulo mostra correlação entre tempo de tela e transtornos de ansiedade em adolescentes brasileiros.</p>
+                <a href="https://www.usp.br/" target="_blank" rel="noopener noreferrer" class="btn">Ver Pesquisa</a>
+            </div>
+            
+            <div class="news-item">
+                <div class="news-date">5 de Dezembro, 2024</div>
+                <h3>Instagram testa ferramenta de bem-estar mental</h3>
+                <p>A plataforma está desenvolvendo recursos para detectar conteúdo potencialmente prejudicial à saúde mental dos usuários.</p>
+                <a href="https://about.instagram.com/" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">Saiba Mais</a>
+            </div>
+            
+            <div class="news-item">
+                <div class="news-date">1 de Dezembro, 2024</div>
+                <h3>Campanha nacional de prevenção ao suicídio ganha força</h3>
+                <p>Ministério da Saúde lança iniciativa para conscientização sobre saúde mental nas escolas e universidades.</p>
+                <a href="https://www.gov.br/saude/" target="_blank" rel="noopener noreferrer" class="btn">Acessar Campanha</a>
+            </div>
+            
+            <div class="news-item">
+                <div class="news-date">28 de Novembro, 2024</div>
+                <h3>Aplicativos de meditação ganham popularidade no Brasil</h3>
+                <p>Crescimento de 200% no download de apps de mindfulness e bem-estar mental durante 2024.</p>
+                <a href="https://www.headspace.com/" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">Conhecer Apps</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="apoio" class="section">
+        <div class="container">
+            <h2 class="section-title">Rede de Apoio e Contatos de Emergência</h2>
+            
+            <div class="warning-box">
+                <h3>🚨 EMERGÊNCIA - Se você está em risco imediato</h3>
+                <p><strong>Ligue 192 (SAMU) ou 190 (Polícia Militar)</strong><br>
+                Em caso de tentativa de suicídio ou risco de vida</p>
+            </div>
+            
+            <div class="support-network">
+                <h3>📞 Linhas de Apoio 24 Horas - GRATUITAS</h3>
+                <div class="support-grid">
+                    <div class="support-item">
+                        <h4>CVV - Centro de Valorização da Vida</h4>
+                        <p>Prevenção do suicídio e apoio emocional</p>
+                        <p><strong>📞 188</strong> (24h, gratuito)</p>
+                        <a href="https://www.cvv.org.br/" target="_blank" rel="noopener noreferrer" class="contact-btn">Site CVV</a>
+                    </div>
+                    
+                    <div class="support-item">
+                        <h4>Disque Saúde</h4>
+                        <p>Informações sobre saúde mental</p>
+                        <p><strong>📞 136</strong> (24h, gratuito)</p>
+                        <a href="https://www.gov.br/saude/" target="_blank" rel="noopener noreferrer" class="contact-btn">Ministério da Saúde</a>
+                    </div>
+                    
+                    <div class="support-item">
+                        <h4>CAPS - Centro de Atenção Psicossocial</h4>
+                        <p>Atendimento gratuito pelo SUS</p>
+                        <p><strong>Busque o CAPS mais próximo</strong></p>
+                        <a href="https://bvsms.saude.gov.br/caps/" target="_blank" rel="noopener noreferrer" class="contact-btn">Localizar CAPS</a>
+                    </div>
+                    
+                    <div class="support-item">
+                        <h4>Mapa da Saúde Mental</h4>
+                        <p>Encontre profissionais na sua região</p>
+                        <p><strong>Psicólogos e Psiquiatras</strong></p>
+                        <a href="https://www.mapadasaudemental.com.br/" target="_blank" rel="noopener noreferrer" class="contact-btn">Acessar Mapa</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="cards-grid">
+                <div class="card">
+                    <h3>🏥 Atendimento Presencial</h3>
+                    <p><strong>UBS - Unidades Básicas de Saúde</strong><br>
+                    Atendimento psicológico gratuito pelo SUS</p>
+                    <p><strong>Hospitais Universitários</strong><br>
+                    Muitos oferecem atendimento psicológico gratuito</p>
+                    <a href="https://www.gov.br/saude/pt-br/acesso-a-informacao/acoes-e-programas/estrategia-saude-da-familia" target="_blank" rel="noopener noreferrer" class="btn">Encontrar UBS</a>
+                </div>
+                
+                <div class="card">
+                    <h3>💻 Atendimento Online</h3>
+                    <p><strong>Psicologia Viva</strong><br>
+                    Atendimento psicológico online gratuito</p>
+                    <p><strong>Zenklub</strong><br>
+                    Plataforma com profissionais qualificados</p>
+                    <a href="https://www.psicologiaviva.com.br/" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">Acessar Plataforma</a>
+                </div>
+                
+                <div class="card">
+                    <h3>👥 Grupos de Apoio</h3>
+                    <p><strong>Neuróticos Anônimos</strong><br>
+                    Grupos de apoio para ansiedade e depressão</p>
+                    <p><strong>ABRATA</strong><br>
+                    Associação Brasileira de Familiares</p>
+                    <a href="https://www.neuroticosanonimos.org.br/" target="_blank" rel="noopener noreferrer" class="btn">Encontrar Grupo</a>
+                </div>
+                
+                <div class="card">
+                    <h3>📱 Apps de Apoio</h3>
+                    <p><strong>Lojong</strong> - Meditação e mindfulness<br>
+                    <strong>Headspace</strong> - Bem-estar mental<br>
+                    <strong>Calm</strong> - Relaxamento e sono</p>
+                    <a href="https://play.google.com/store/apps/details?id=com.lojong.meditate" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">Download Apps</a>
+                </div>
+                
+                <div class="card">
+                    <h3>🎓 Para Estudantes</h3>
+                    <p><strong>Núcleos de Apoio Psicopedagógico</strong><br>
+                    Disponíveis em universidades públicas</p>
+                    <p><strong>Programa de Apoio Estudantil</strong><br>
+                    Consulte sua instituição de ensino</p>
+                    <a href="https://www.andifes.org.br/" target="_blank" rel="noopener noreferrer" class="btn">ANDIFES</a>
+                </div>
+                
+                <div class="card">
+                    <h3>⚖️ Direitos e Legislação</h3>
+                    <p><strong>Lei 10.216/2001</strong><br>
+                    Lei da Reforma Psiquiátrica</p>
+                    <p><strong>Ouvidoria do SUS</strong><br>
+                    136 - Para denúncias e reclamações</p>
+                    <a href="https://www.gov.br/saude/pt-br/acesso-a-informacao/ouvidoria" target="_blank" rel="noopener noreferrer" class="btn">Ouvidoria SUS</a>
+                </div>
+            </div>
+            
+            <div class="warning-box">
+                <h3>💙 Lembre-se</h3>
+                <p>Buscar ajuda é um ato de coragem, não de fraqueza. Você não está sozinho(a) e sua vida tem valor. Existem pessoas e profissionais prontos para te apoiar.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Saúde Mental Digital. Este site tem fins educativos e não substitui acompanhamento profissional.</p>
+            <p>Em caso de emergência, procure ajuda imediatamente: CVV 188 | SAMU 192</p>
+        </div>
     </footer>
 
     <script>
-        const contentData = {
-            movies: [
-                {
-                    title: "Vingadores: Ultimato",
-                    genre: "acao",
-                    rating: 5,
-                    description: "A batalha final contra Thanos para salvar o universo.",
-                    emoji: "🦸‍♂️",
-                    type: "filme"
-                },
-                {
-                    title: "Parasita",
-                    genre: "drama",
-                    rating: 5,
-                    description: "Um thriller psicológico sobre desigualdade social.",
-                    emoji: "🎭",
-                    type: "filme"
-                },
-                {
-                    title: "Interestelar",
-                    genre: "ficcao",
-                    rating: 5,
-                    description: "Uma jornada épica através do espaço e tempo.",
-                    emoji: "🚀",
-                    type: "filme"
-                },
-                {
-                    title: "Coringa",
-                    genre: "drama",
-                    rating: 4,
-                    description: "A origem sombria do icônico vilão de Gotham.",
-                    emoji: "🃏",
-                    type: "filme"
-                },
-                {
-                    title: "Toy Story 4",
-                    genre: "comedia",
-                    rating: 4,
-                    description: "Woody e Buzz em uma nova aventura emocionante.",
-                    emoji: "🧸",
-                    type: "filme"
-                },
-                {
-                    title: "Hereditário",
-                    genre: "terror",
-                    rating: 4,
-                    description: "Um horror psicológico sobre segredos familiares.",
-                    emoji: "👻",
-                    type: "filme"
-                }
-            ],
-            series: [
-                {
-                    title: "Stranger Things",
-                    genre: "ficcao",
-                    rating: 5,
-                    description: "Mistérios sobrenaturais em uma pequena cidade dos anos 80.",
-                    emoji: "🔮",
-                    type: "serie"
-                },
-                {
-                    title: "Breaking Bad",
-                    genre: "drama",
-                    rating: 5,
-                    description: "A transformação de um professor em um criminoso.",
-                    emoji: "⚗️",
-                    type: "serie"
-                },
-                {
-                    title: "The Office",
-                    genre: "comedia",
-                    rating: 4,
-                    description: "Comédia sobre o dia a dia em um escritório.",
-                    emoji: "📋",
-                    type: "serie"
-                },
-                {
-                    title: "Game of Thrones",
-                    genre: "acao",
-                    rating: 4,
-                    description: "Épica batalha pelo Trono de Ferro em Westeros.",
-                    emoji: "⚔️",
-                    type: "serie"
-                },
-                {
-                    title: "Black Mirror",
-                    genre: "ficcao",
-                    rating: 4,
-                    description: "Antologia sobre os perigos da tecnologia moderna.",
-                    emoji: "📱",
-                    type: "serie"
-                },
-                {
-                    title: "The Haunting of Hill House",
-                    genre: "terror",
-                    rating: 4,
-                    description: "Uma família assombrada por memórias de uma casa mal-assombrada.",
-                    emoji: "🏚️",
-                    type: "serie"
-                }
-            ]
-        };
-
-        let currentContent = [...contentData.movies, ...contentData.series];
-        let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
-
-        function renderContent(content) {
-            const grid = document.getElementById('contentGrid');
-            grid.innerHTML = '';
-
-            content.forEach((item, index) => {
-                const stars = '⭐'.repeat(item.rating) + '☆'.repeat(5 - item.rating);
-                const isFavorite = favorites.includes(item.title);
-                
-                const card = document.createElement('div');
-                card.className = 'content-card';
-                card.innerHTML = `
-                    <div class="card-image">
-                        ${item.emoji}
-                    </div>
-                    <div class="card-title">${item.title}</div>
-                    <div class="card-genre">${item.type.toUpperCase()} • ${getGenreName(item.genre)}</div>
-                    <div class="card-rating">
-                        <span class="stars">${stars}</span>
-                        <span>${item.rating}/5</span>
-                    </div>
-                    <div class="card-description">${item.description}</div>
-                    <div style="margin-top: 1rem; display: flex; gap: 0.5rem;">
-                        <button class="cta-button" style="padding: 0.5rem 1rem; font-size: 0.9rem;" onclick="watchContent('${item.title}')">
-                            ▶️ Assistir
-                        </button>
-                        <button class="category-btn" style="padding: 0.5rem;" onclick="toggleFavorite('${item.title}')" title="${isFavorite ? 'Remover dos favoritos' : 'Adicionar aos favoritos'}">
-                            ${isFavorite ? '❤️' : '🤍'}
-                        </button>
-                    </div>
-                `;
-                grid.appendChild(card);
+        function showSection(sectionId, navItem) {
+            // Esconder todas as seções
+            const sections = document.querySelectorAll('.section');
+            sections.forEach(section => {
+                section.classList.remove('active');
             });
-        }
-
-        function getGenreName(genre) {
-            const genres = {
-                'acao': 'Ação',
-                'drama': 'Drama',
-                'comedia': 'Comédia',
-                'ficcao': 'Ficção Científica',
-                'terror': 'Terror'
-            };
-            return genres[genre] || genre;
-        }
-
-        function showSection(section) {
-            // Atualizar menu ativo
-            document.querySelectorAll('.nav-menu a').forEach(a => a.classList.remove('active'));
-            event.target.classList.add('active');
-
-            const titleElement = document.querySelector('.section-title');
             
-            switch(section) {
-                case 'home':
-                    currentContent = [...contentData.movies, ...contentData.series];
-                    titleElement.textContent = 'Em Destaque';
-                    break;
-                case 'movies':
-                    currentContent = contentData.movies;
-                    titleElement.textContent = 'Filmes';
-                    break;
-                case 'series':
-                    currentContent = contentData.series;
-                    titleElement.textContent = 'Séries';
-                    break;
-                case 'favorites':
-                    currentContent = [...contentData.movies, ...contentData.series].filter(item => 
-                        favorites.includes(item.title)
-                    );
-                    titleElement.textContent = 'Meus Favoritos';
-                    break;
-            }
+            // Mostrar a seção selecionada
+            document.getElementById(sectionId).classList.add('active');
             
-            renderContent(currentContent);
-            resetCategoryButtons();
-        }
-
-        function filterContent(genre) {
-            // Atualizar botão ativo
-            document.querySelectorAll('.category-btn').forEach(btn => btn.classList.remove('active'));
-            event.target.classList.add('active');
-
-            if (genre === 'all') {
-                renderContent(currentContent);
-            } else {
-                const filtered = currentContent.filter(item => item.genre === genre);
-                renderContent(filtered);
-            }
-        }
-
-        function resetCategoryButtons() {
-            document.querySelectorAll('.category-btn').forEach(btn => btn.classList.remove('active'));
-            document.querySelector('.category-btn').classList.add('active');
-        }
-
-        function searchContent(event) {
-            const searchTerm = event.target.value.toLowerCase();
+            // Atualizar navegação ativa
+            const navItems = document.querySelectorAll('.nav-item');
+            navItems.forEach(item => {
+                item.classList.remove('active');
+            });
+            navItem.classList.add('active');
             
-            if (event.key === 'Enter' || searchTerm === '') {
-                if (searchTerm === '') {
-                    renderContent(currentContent);
-                } else {
-                    const filtered = currentContent.filter(item => 
-                        item.title.toLowerCase().includes(searchTerm) ||
-                        item.description.toLowerCase().includes(searchTerm) ||
-                        getGenreName(item.genre).toLowerCase().includes(searchTerm)
-                    );
-                    renderContent(filtered);
+            // Scroll para o topo
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Smooth scroll para links internos
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth'
+                    });
                 }
-                resetCategoryButtons();
-            }
-        }
+            });
+        });
 
-        function watchContent(title) {
-            alert(`🎬 Iniciando reprodução de "${title}"!\n\nEm um site real, isso abriria o player de vídeo.`);
-        }
-
-        function toggleFavorite(title) {
-            const index = favorites.indexOf(title);
-            if (index > -1) {
-                favorites.splice(index, 1);
-            } else {
-                favorites.push(title);
-            }
+        // Adicionar efeito de hover nos cards
+        document.querySelectorAll('.card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-5px)';
+            });
             
-            localStorage.setItem('favorites', JSON.stringify(favorites));
-            
-            // Re-renderizar para atualizar os ícones de coração
-            const currentSection = document.querySelector('.nav-menu a.active').textContent.toLowerCase();
-            if (currentSection === 'favoritos') {
-                showSection('favorites');
-            } else {
-                renderContent(currentContent);
-            }
-        }
-
-        // Inicializar a página
-        document.addEventListener('DOMContentLoaded', function() {
-            renderContent(currentContent);
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0)';
+            });
         });
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9883ddf1515ec20f',t:'MTc1OTQwNDYxOC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'98a59e13e656c20f',t:'MTc1OTc1ODUxOC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
